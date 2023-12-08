@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0c192c;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-color, #fff);
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background: #1a1a1a;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        nav {
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4fc3dc;
+        }
+
+        .container {
+            background: url('img/thiss-removebg.png') center/cover no-repeat;
+    background-size: 70%; /* Adjust the percentage value as needed */
+
+
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 50px); /* Subtract the height of the footer */
+            overflow: hidden;
+        }
+
+        .bubbles {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .bubbles span {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            background: var(--bubble-color, #4fc3dc);
+            margin-bottom: 4px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px var(--bubble-color, #4fc3dc)44,
+                        0 0 25px var(--bubble-color, #4fc3dc),
+                        0 0 50px var(--bubble-color, #4fc3dc);
+            animation: animate 15s linear infinite;
+            animation-duration: calc(125s / var(--i));
+            animation-delay: calc(5s / var(--i));
+        }
+
+        @keyframes animate {
+            0%, 100% {
+                transform: translateY(-100vh) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(calc(100vh + 100%)) translateX(calc(5px - 10px * var(--i))) rotate(360deg);
+            }
+        }
+
+        .frame {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background-color: #fff;
+        }
+
+        .color-palette {
+            top: 10px;
+            left: 800px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 50px;
+            padding-left: 40px;
+        }
+
+        .color-palette span {
+            font-size: 18px;
+        }
+
+        .color-palette input {
+            width: 40px;
+            height: 40px;
+        }
+
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: url('img/footer.png') center/cover no-repeat;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed; /* Fixed position so it stays at the bottom */
+            bottom: 0;
+            z-index: 1;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const backgroundPicker = document.getElementById('backgroundPicker');
+            const bubblePicker = document.getElementById('bubblePicker');
+            const textPicker = document.getElementById('textPicker');
+
+            backgroundPicker.addEventListener('input', function (event) {
+                document.body.style.backgroundColor = event.target.value;
+            });
+
+            bubblePicker.addEventListener('input', function (event) {
+                document.documentElement.style.setProperty('--bubble-color', event.target.value);
+            });
+
+            textPicker.addEventListener('input', function (event) {
+                document.documentElement.style.setProperty('--text-color', event.target.value);
+            });
+        });
+    </script>
+    <title>Interactive Website</title>
+</head>
+
+<body>
+    <header>
+        <h1>Akatsuki 2.0</h1>
+    </header>
+
+    <div class="container">
+        <div class="bubbles">
+            <span style="--i:11;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:24;"></span>
+            <span style="--i:10;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:20;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:25;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:26;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:28;"></span>
+        </div>
+        <div class="color-palette">
+            <span>Background Color</span>
+            <input type="color" id="backgroundPicker" value="#0c192c">
+            <span>Bubble Color</span>
+            <input type="color" id="bubblePicker" value="#4fc3dc">
+        </div>
+        <div class="color-palette">
+            <span>Text Color</span>
+            <input type="color" id="textPicker" value="#fff">
+        </div>
+        <div class="text-container">
+            <p>AKATSUKI 2.0</p>
+            <p>Participants: Nour Montacer, Hazem Rekik, Salma Hamdouni, Oussema Rouissi, Helmi Khiari, Khouloud Daly, Rayen Abed</p>
+            <p>Thanks for giving us this chance!</p>
+        </div>
+        <footer>
+            &copy; 2023 Akatsuki 2.0. All Rights Reserved.
+        </footer>
+    </div>
+</body>
+
+</html>
